@@ -6,34 +6,34 @@
     </div>
   </div>
   <div class="content">
-    <form [formGroup]="registrationFormGroup">
+    <form [formGroup]="registrationFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
       <div class="flex-box">
         <label class="flabel">User Name</label>
-        <input class="ffield" type="text" formControlName="userName" placeholder="User Name" required />
+        <input class="ffield" type="text" name="userName" #userName="ngModel" [(ngModel)]="user.userName" [ngModelOptions]="{standalone: true}" placeholder="User Name" required />
       </div>
       <div class="flex-box">
         <label class="flabel">Email</label>
-        <input class="ffield" type="email" formControlName="email" placeholder="Email" />
+        <input class="ffield" type="email" name="email" #email="ngModel" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" placeholder="Email" required/>
       </div>
       <div class="flex-box">
         <label class="flabel">First Name</label>
-        <input class="ffield" type="text" formControlName="firstName" placeholder="First Name" required />
+        <input class="ffield" type="text" name="firstName" #firstName="ngModel" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}" placeholder="First Name" required />
       </div>
       <div class="flex-box">
         <label class="flabel">Last Name</label>
-        <input class="ffield" type="text" formControlName="lastName" placeholder="Last Name" required />
+        <input class="ffield" type="text" name="lastName" #lastName="ngModel" [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}" placeholder="Last Name" required />
       </div>
       <div class="flex-box">
         <label class="flabel">Date Of Birth</label>
-        <input class="ffield" type="date" formControlName="dateOfBirth" placeholder="Date Of Birth" required />
+        <input class="ffield" type="date" name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth" [ngModelOptions]="{standalone: true}" placeholder="Date Of Birth" required />
       </div>
       <div class="flex-box">
         <label class="flabel">Password</label>
-        <input class="ffield" type="password" formControlName="password" placeholder="Password" required />
+        <input class="ffield" type="password" name="password" #password="ngModel" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" placeholder="Password" required />
       </div>
       <div class="flex-box">
         <label class="flabel">Skills</label>
-        <select class="ffield" formControlName="skills" required>
+        <select class="ffield" name="skills" [(ngModel)]="user.skills" #skills="ngModel" [ngModelOptions]="{standalone: true}" required>
           <option value="" disabled>Select</option>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
@@ -43,7 +43,7 @@
       </div>
       <div class="flex-box">
         <label class="flabel">Country</label>
-        <select class="ffield" formControlName="country" required>
+        <select class="ffield" name="country" [(ngModel)]="user.country" [ngModelOptions]="{standalone: true}" required>
           <option value="" disabled>Select</option>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
@@ -52,7 +52,7 @@
         </select>
       </div>
       <div class="flex-box">
-        <button (click)="submitStage('General', generalFormGroup)" color="primary">Next</button>
+        <button color="primary">Next</button>
       </div>
     </form>
   </div>
