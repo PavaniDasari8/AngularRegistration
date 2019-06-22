@@ -1,0 +1,62 @@
+<div class="registrationPage">
+  <div class="header"></div>
+  <div class="header2">
+    <div class="heading">
+      Register
+    </div>
+  </div>
+  <div class="content">
+    <form [formGroup]="registrationFormGroup">
+      <div class="flex-box">
+        <label class="flabel">User Name</label>
+        <input class="ffield" type="text" formControlName="userName" placeholder="User Name" required />
+      </div>
+      <div class="flex-box">
+        <label class="flabel">Email</label>
+        <input class="ffield" type="email" formControlName="email" placeholder="Email" />
+      </div>
+      <div class="flex-box">
+        <label class="flabel">First Name</label>
+        <input class="ffield" type="text" formControlName="firstName" placeholder="First Name" required />
+      </div>
+      <div class="flex-box">
+        <label class="flabel">Last Name</label>
+        <input class="ffield" type="text" formControlName="lastName" placeholder="Last Name" required />
+      </div>
+      <div class="flex-box">
+        <label class="flabel">Date Of Birth</label>
+        <input class="ffield" type="date" formControlName="dateOfBirth" placeholder="Date Of Birth" required />
+      </div>
+      <div class="flex-box">
+        <label class="flabel">Password</label>
+        <input class="ffield" type="password" formControlName="password" placeholder="Password" required />
+      </div>
+      <div class="flex-box">
+        <label class="flabel">Skills</label>
+        <select class="ffield" formControlName="skills" required>
+          <option value="" disabled>Select</option>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </div>
+      <div class="flex-box">
+        <label class="flabel">Country</label>
+        <select class="ffield" formControlName="country" required>
+          <option value="" disabled>Select</option>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </div>
+      <div class="flex-box">
+        <button (click)="submitStage('General', generalFormGroup)" color="primary">Next</button>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="footer">
+    <p>This is just test tab</p>
+  </div> -->
+</div>
