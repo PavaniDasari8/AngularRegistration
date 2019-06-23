@@ -10,7 +10,7 @@
           <label class="flabel pname">{{user?.userName}} </label>
         </div>
         <div class="flex-box">
-          <i class="fa fa-map-marker"></i>
+          <i class="fa fa-map-marker"></i> &nbsp;&nbsp;
           <label class="flabel">{{user?.country}} </label>
         </div>
       </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="flex-box">
           <label class="flabel">Date of birth:</label>
-          <label class="ffield">{{user?.dateOfBirth}}</label>
+          <label class="ffield">{{user?.dateOfBirth| date: mediumDate}}</label>
         </div>
         <div class="flex-box">
           <label class="flabel">Skills:</label>
