@@ -27,7 +27,7 @@ import { HeaderComponent } from './components/header/header.component';
     ReactiveFormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyDIvhthcfgEIiElWNOXOI-nICXmibzCr7M",
+      apiKey: "Place your google api key here",
       libraries: ["places"]
     })
   ],
