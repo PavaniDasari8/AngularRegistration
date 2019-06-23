@@ -1,0 +1,22 @@
+.header {
+  height: 35px;
+  min-width: 33em;
+  background-color: rgb(84, 97, 141);
+  position: relative;
+}
+.header2 {
+  height: 50px;
+  min-width: 33em;
+  background-color: rgb(236, 237, 241);
+  position: relative;
+  .heading {
+    position: absolute;
+    color: rgb(39, 40, 41);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    font-size: 1.5em;
+    text-transform: uppercase;
+  }
+}

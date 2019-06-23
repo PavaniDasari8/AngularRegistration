@@ -1,6 +1,6 @@
 export interface userInterface {
     userName: string;
-    email: string;
+    email?: string;
     firstName?: string;
     lastName?: string;
     dateOfBirth?: string;
@@ -11,7 +11,7 @@ export interface userInterface {
 
 export class User {
     public userName: string;
-    public email: string;
+    public email?: string;
     public firstName?: string;
     public lastName?: string;
     public dateOfBirth?: string;
