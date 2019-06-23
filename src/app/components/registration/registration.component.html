@@ -56,20 +56,16 @@
         <label class="flabel">Skills</label>
         <select class="ffield" name="skills" [(ngModel)]="user.skills" #skills="ngModel" required>
           <option value="" disabled>Select</option>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+          <option value="Skill 1">Skill 1</option>
+          <option value="Skill 2">Skill 2</option>
+          <option value="Skill 3">Skill 3</option>
+          <option value="Skill 4">Skill 4</option>
         </select>
       </div>
       <div class="flex-box">
         <label class="flabel">Country</label>
         <select class="ffield" name="country" [(ngModel)]="user.country" required>
-          <option value="" disabled>Select</option>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+          <option *ngFor="let country of countrylist" [value]="country?.name">{{country?.name}}</option>
         </select>
       </div>
       <div class="flex-box">

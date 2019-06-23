@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { UserService } from 'app/services/user/user.service';
 import { User } from 'app/models';
 import { Router } from '@angular/router';
+import { MapsAPILoader } from '@agm/core';
+declare var google;
+import { countryList } from 'app/models/country';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +17,12 @@ export class RegistrationComponent implements OnInit {
   user = new User();
   validName = '';
   validEmail = '';
-  constructor(private userService: UserService, private router: Router) { }
+  countrylist = countryList;
+  constructor(private userService: UserService,
+    private router: Router,
+    private mapsAPILoader: MapsAPILoader) {
+    this.getCurrentCountry();
+  }
 
   ngOnInit() {
     this.registrationForm = new FormGroup({
@@ -83,7 +91,7 @@ export class RegistrationComponent implements OnInit {
       this.userService.signUp(payload).subscribe((res) => {
         if (res) {
           if (res.status === 200) {
-            alert('Successfully Registered!! :-)\n\n' + res.response.userName);
+            alert('Successfully Registered!! ' + res.response.userName);
             localStorage.setItem('userInfo', JSON.stringify(res.response));
             this.router.navigateByUrl('/profile');
           }
@@ -95,4 +103,33 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  async getCurrentCountry() {
+    return await new Promise((resolve, reject) => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          this.mapsAPILoader.load().then(() => {
+            const geocoder = new google.maps.Geocoder();
+            const latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            geocoder.geocode({ 'location': latlng }, (results, status) => {
+              if (status === google.maps.GeocoderStatus.OK) {
+                const address_components = results[0].address_components;
+                const address = address_components.filter(r => {
+                  if (r.types[0] === 'country') {
+                    this.user.country = r.long_name;
+                    return r;
+                  }
+                }).map(r => {
+                  return r.short_name;
+                })
+                resolve(address[0]);
+              }
+            });
+          });
+
+        });
+      } else {
+        return 'SA';
+      }
+    })
+  }
 }
