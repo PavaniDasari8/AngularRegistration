@@ -1,15 +1,16 @@
 .registrationPage {
   .header {
     height: 35px;
-    min-width: 33.5em;
+    min-width: 33em;
     background-color: rgb(84, 97, 141);
     position: relative;
   }
   .header2 {
     height: 50px;
-    min-width: 33.5em;
+    min-width: 33em;
     background-color: rgb(236, 237, 241);
     position: relative;
+    margin-bottom: 1em;
     .heading {
       position: absolute;
       color: rgb(39, 40, 41);
@@ -26,6 +27,8 @@
     margin: 0 auto;
     width: 30em;
     padding: 1em;
+    background-color: rgb(243, 243, 243);
+    border-radius: 4px;
     .flex-box {
       display: flex;
       padding: 0.5em;
@@ -46,6 +49,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+        cursor: default;
       }
       button{
         width: 100%;
@@ -57,10 +61,32 @@
         box-sizing: border-box;
         font-size: 1.1em;
         font-weight: 600;
+        cursor: pointer;
       }
       button:hover {
         background-color: #45a049;
       }
+      button:disabled,
+      button[disabled]{
+        border: 1px solid #b5b5b5;
+        background-color: #cccccc;
+        color: #666666;
+        cursor: not-allowed;
+      }
+    }
+    .errormsg{
+      color: red;
+      padding: 0px;
+      font-size: 0.9em;
+      text-align: center;
+      line-height: 0;
+    }
+    .successmsg{
+      color: #45a049;
+      padding: 0px;
+      font-size: 0.9em;
+      text-align: center;
+      line-height: 0;
     }
   }
 

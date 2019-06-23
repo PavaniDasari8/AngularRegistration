@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn } from "@angular/forms";
 import { UserService } from 'app/services/user/user.service';
 import { User } from 'app/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -9,34 +10,48 @@ import { User } from 'app/models';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-  registrationFormGroup: FormGroup;
+  registrationForm: FormGroup;
   user = new User();
-
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+  validName = '';
+  validEmail = '';
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.registrationFormGroup = this.formBuilder.group({
-      userName: [this.user.userName, Validators.required],
-      email: [this.user.email, Validators.required],
-      firstName: [this.user.firstName],
-      lastName: [this.user.lastName],
-      dateOfBirth: [this.user.dateOfBirth],
-      password: [this.user.password, Validators.required],
-      skills: [this.user.skills],
-      country: [this.user.country]
+    this.registrationForm = new FormGroup({
+      userName: new FormControl(this.user.userName, [Validators.required]),
+      email: new FormControl(this.user.email, Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      firstName: new FormControl(this.user.firstName, Validators.required),
+      lastName: new FormControl(this.user.lastName),
+      dateOfBirth: new FormControl(this.user.dateOfBirth),
+      password: new FormControl(this.user.password, Validators.required),
+      skills: new FormControl(this.user.skills),
+      country: new FormControl(this.user.country)
     });
   }
 
-  get f() { return this.registrationFormGroup.controls; }
+  async validname(name) {
+    const res = await this.userService.userNameValidation(name).toPromise();
+    if (res.status == 200)
+      this.validName = 'valid';
+    else
+      this.validName = 'invalid';
+  }
 
-  onSubmit() {
-    // this.submitted = true;
-    // stop here if form is invalid
-    console.log(this.registrationFormGroup.invalid, 'validation');
-    // if (this.registrationFormGroup.invalid) {
-    //   return;
-    // }
-    const payload = new User({
+  async validemail(email, valid) {
+    if (valid) {
+      const res = await this.userService.emailValidation(email).toPromise();
+      if (res.status == 200)
+        this.validEmail = 'valid';
+      else
+        this.validEmail = 'invalid';
+    }
+  }
+
+  validateForm = () => {
+    this.registrationForm.setValue({
       userName: this.user.userName,
       email: this.user.email,
       firstName: this.user.firstName,
@@ -46,11 +61,38 @@ export class RegistrationComponent implements OnInit {
       skills: this.user.skills,
       country: this.user.country
     });
-    this.userService.signUp(payload).subscribe((res) => {
-      console.log(res.body);
-    });
+    if (this.registrationForm.valid && this.validName === 'valid' && this.validEmail === 'valid') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registrationFormGroup.value));
+  onSubmit() {
+    if (this.validateForm) {
+      const payload = new User({
+        userName: this.user.userName,
+        email: this.user.email,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        dateOfBirth: this.user.dateOfBirth,
+        password: this.user.password,
+        skills: this.user.skills,
+        country: this.user.country
+      });
+      this.userService.signUp(payload).subscribe((res) => {
+        if (res) {
+          if (res.status === 200) {
+            alert('Successfully Registered!! :-)\n\n' + res.response.userName);
+            localStorage.setItem('userInfo', JSON.stringify(res.response));
+            this.router.navigateByUrl('/profile');
+          }
+          if (res.status === 401) {
+            alert('Please try with valid data!! :-)\n\n');
+          }
+        }
+      });
+    }
   }
 
 }

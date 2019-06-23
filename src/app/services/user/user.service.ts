@@ -26,4 +26,19 @@ export class UserService {
       return res;
     }));
   }
+
+  userNameValidation(name): Observable<any> {
+    return this.http.get(this.userUrl + '/validate/userName/' + name).pipe(tap(res => {
+      console.log(res, 'check res');
+      return res;
+    }));
+  }
+
+  emailValidation(email): Observable<any> {
+    console.log(email, 'to validate');
+    return this.http.get(this.userUrl + '/validate/email/' + email).pipe(tap(res => {
+      console.log(res, 'check res');
+      return res;
+    }));
+  }
 }

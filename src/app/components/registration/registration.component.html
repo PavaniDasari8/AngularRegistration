@@ -2,38 +2,64 @@
   <div class="header"></div>
   <div class="header2">
     <div class="heading">
-      Register
+      Welcome
     </div>
   </div>
   <div class="content">
-    <form [formGroup]="registrationFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
+    <form autocomplete="false">
       <div class="flex-box">
-        <label class="flabel">User Name</label>
-        <input class="ffield" type="text" name="userName" #userName="ngModel" [(ngModel)]="user.userName" [ngModelOptions]="{standalone: true}" placeholder="User Name" required />
+        <label class=" flabel">User Name</label>
+        <input class="ffield" type="text" name="userName" #userName="ngModel" [(ngModel)]="user.userName"
+          placeholder="User Name" (change)="validname(user.userName)" required />
       </div>
+      <p *ngIf="(userName.invalid && (userName.dirty || userName.touched))" class="errormsg">*User Name is required
+      </p>
+      <p *ngIf="validName == 'invalid'" class="errormsg"><span>&#10008;</span> User name already Exists</p>
+      <p *ngIf="validName == 'valid'" class="successmsg"><span>&#10004;</span> Valid user name</p>
       <div class="flex-box">
         <label class="flabel">Email</label>
-        <input class="ffield" type="email" name="email" #email="ngModel" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" placeholder="Email" required/>
+        <input class="ffield" type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
+          placeholder="Email" pattern="^\S*[@]\S*[.]\S*$" (change)="validemail(user.email, email.valid)" required />
       </div>
+      <div *ngIf="(email.invalid && (email.dirty || email.touched))">
+        <p *ngIf="email.errors.required" class="errormsg">
+          Email is required
+        </p>
+        <p *ngIf="email.errors.pattern" class="errormsg">
+          Enter valid email
+        </p>
+      </div>
+      <p *ngIf="validEmail == 'invalid'" class="errormsg"><span>&#10008;</span> Email already Exists</p>
+      <p *ngIf="validEmail == 'valid'" class="successmsg"><span>&#10004;</span> Valid email</p>
       <div class="flex-box">
         <label class="flabel">First Name</label>
-        <input class="ffield" type="text" name="firstName" #firstName="ngModel" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}" placeholder="First Name" required />
+        <input class="ffield" type="text" name="firstName" #firstName="ngModel" [(ngModel)]="user.firstName"
+          placeholder="First Name" required />
       </div>
+      <p *ngIf="(firstName.invalid && (firstName.dirty || firstName.touched))" class="errormsg">
+        First Name is required
+      </p>
       <div class="flex-box">
         <label class="flabel">Last Name</label>
-        <input class="ffield" type="text" name="lastName" #lastName="ngModel" [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}" placeholder="Last Name" required />
+        <input class="ffield" type="text" name="lastName" #lastName="ngModel" [(ngModel)]="user.lastName"
+          placeholder="Last Name" required />
       </div>
       <div class="flex-box">
         <label class="flabel">Date Of Birth</label>
-        <input class="ffield" type="date" name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth" [ngModelOptions]="{standalone: true}" placeholder="Date Of Birth" required />
+        <input class="ffield" type="date" name="dateOfBirth" #dateOfBirth="ngModel" [(ngModel)]="user.dateOfBirth"
+          placeholder="Date Of Birth" required />
       </div>
       <div class="flex-box">
         <label class="flabel">Password</label>
-        <input class="ffield" type="password" name="password" #password="ngModel" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" placeholder="Password" required />
+        <input class="ffield" type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
+          placeholder="Password" required />
       </div>
+      <p *ngIf="(password.invalid && (password.dirty || password.touched))" class="errormsg">
+        Password is required
+      </p>
       <div class="flex-box">
         <label class="flabel">Skills</label>
-        <select class="ffield" name="skills" [(ngModel)]="user.skills" #skills="ngModel" [ngModelOptions]="{standalone: true}" required>
+        <select class="ffield" name="skills" [(ngModel)]="user.skills" #skills="ngModel" required>
           <option value="" disabled>Select</option>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
@@ -43,7 +69,7 @@
       </div>
       <div class="flex-box">
         <label class="flabel">Country</label>
-        <select class="ffield" name="country" [(ngModel)]="user.country" [ngModelOptions]="{standalone: true}" required>
+        <select class="ffield" name="country" [(ngModel)]="user.country" required>
           <option value="" disabled>Select</option>
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
@@ -52,7 +78,7 @@
         </select>
       </div>
       <div class="flex-box">
-        <button color="primary">Next</button>
+        <button color="primary" [disabled]="!(validateForm())" (click)="onSubmit()">Register</button>
       </div>
     </form>
   </div>
