@@ -1,0 +1,61 @@
+.profilePage {
+  .content {
+    margin: 0 auto;
+    width: 30em;
+    padding: 1em;
+    margin-top: 1em;
+    border-radius: 4px;
+    .flex-container {
+      display: flex;
+      background-color: transparent;
+      flex-wrap: wrap;
+      .imagespace {
+        margin: 1em 3.5em;
+        flex: 0 0 4em;
+        min-width: 7em;
+        img {
+          width: 7em;
+          background-color: white;
+          border-radius: 50%;
+          border: 2px solid gray;
+        }
+      }
+      .user-details{
+        margin: 0 auto;
+        width: 20em;
+      }
+      .flex-box {
+        display: flex;
+        flex: 0 0 6em;
+        margin: 1em 0em;
+        padding: 0.5em;
+        font-size: 1.1em;
+        .flabel {
+          flex: 0 0 8em;
+          color: rgb(27, 27, 27);
+        }
+        .ffield {
+          flex-grow: 6;
+        }
+      }
+    }
+    .uname{
+        .flex-box:nth-child(1){
+            margin: 1em 0em -1em 0em;
+            .pname{
+                color: rgb(27, 27, 27);
+                height: 0px;
+                font-size: 2em;
+                font-weight: bold;
+                text-transform: capitalize;
+            }
+        }
+        .flex-box:nth-child(2){
+            i{
+                color: red;
+                font-size: 1.2em;
+            }
+        }
+    }
+  }
+}

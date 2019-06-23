@@ -1,3 +1,44 @@
-<p>
-  profile works!
-</p>
+<div class="profilePage">
+  <app-header title="Profile" [name]="user?.userName" (logout)="logoutUser($event)"></app-header>
+  <div class="content">
+    <div class="flex-container">
+      <div class="imagespace">
+        <img src="/assets/images/profile.png" />
+      </div>
+      <div class="flex-container uname">
+        <div class="flex-box">
+          <label class="flabel pname">{{user?.userName}} </label>
+        </div>
+        <div class="flex-box">
+          <i class="fa fa-map-marker"></i>
+          <label class="flabel">{{user?.country}} </label>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="flex-container">
+      <div class="user-details">
+        <div class="flex-box">
+          <label class="flabel">Email:</label>
+          <label class="ffield">{{user?.email}}</label>
+        </div>
+        <div class="flex-box">
+          <label class="flabel">First Name:</label>
+          <label class="ffield">{{user?.firstName}}</label>
+        </div>
+        <div class="flex-box">
+          <label class="flabel">Last Name:</label>
+          <label class="ffield">{{user?.lastName}}</label>
+        </div>
+        <div class="flex-box">
+          <label class="flabel">Date of birth:</label>
+          <label class="ffield">{{user?.dateOfBirth}}</label>
+        </div>
+        <div class="flex-box">
+          <label class="flabel">Skills:</label>
+          <label class="ffield">{{user?.skills}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

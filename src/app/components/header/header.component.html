@@ -1,6 +1,15 @@
-<div class="header"></div>
+<div class="header">
+  <div class="profile" *ngIf="name">
+    <img src="/assets/images/profile.png" />
+    Hi, {{name}}
+  </div>
+  <div class="logout" *ngIf="name" (click)="logoutEvent()">
+    Logout
+    <img src="/assets/images/expand.png" />
+  </div>
+</div>
 <div class="header2">
   <div class="heading">
-    Welcome
+    {{title}}
   </div>
 </div>

@@ -1,12 +1,38 @@
 .header {
   height: 35px;
-  min-width: 33em;
+  min-width: 32.7em;
   background-color: rgb(84, 97, 141);
   position: relative;
+  .profile {
+    position: absolute;
+    position: absolute;
+    transform: translate(30%, 40%);
+    color: white;
+    cursor: default;
+    img {
+      width: 1.2em;
+      background-color: white;
+      border-radius: 50%;
+      float: left;
+      margin-right: 0.5em;
+    }
+  }
+  .logout {
+    position: absolute;
+    right: 0%;
+    transform: translate(-5%, 35%);
+    color: white;
+    cursor: pointer;
+    img {
+      width: 1.3em;
+      float: right;
+      margin-top: 0em;
+    }
+  }
 }
 .header2 {
   height: 50px;
-  min-width: 33em;
+  min-width: 32.7em;
   background-color: rgb(236, 237, 241);
   position: relative;
   .heading {
