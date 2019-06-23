@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { UserService } from 'app/services/user/user.service';
 import { User } from 'app/models';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ export class RegistrationComponent implements OnInit {
   user = new User();
   validName = '';
   validEmail = '';
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.registrationForm = new FormGroup({

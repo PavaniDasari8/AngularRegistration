@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HeaderComponent } from './components/header/header.component';
 
 import { CustomDirective } from './shared/custom.directive';
 
@@ -18,6 +19,7 @@ import { CustomDirective } from './shared/custom.directive';
     RegistrationComponent,
     LoginComponent,
     ProfileComponent,
+    HeaderComponent,
     CustomDirective
   ],
   imports: [

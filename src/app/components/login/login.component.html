@@ -1,3 +1,24 @@
-<p>
-  login works!
-</p>
+<div class="loginPage">
+  <app-header></app-header>
+  <div class="content">
+    <form autocomplete="false">
+      <div class="flex-box">
+        <label class=" flabel">User Name/ Email</label>
+        <input class="ffield" type="text" name="userName" #userName="ngModel" [(ngModel)]="user.userName"
+          placeholder="User Name/ Email" required />
+      </div>
+      <div class="flex-box">
+        <label class="flabel">Password</label>
+        <input class="ffield" type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
+          placeholder="Password" required />
+      </div>
+      <p *ngIf="(password.invalid && (password.dirty || password.touched))" class="errormsg">
+        Password is required
+      </p>
+      <div class="flex-box">
+        <button color="primary" [disabled]="!(validateForm())" (click)="onSubmit()">LogIn</button>
+      </div>
+    </form>
+    <a class="authnav" routerLink="/registration" routerLinkActive="active">New User? Sign up now</a>
+  </div>
+</div>

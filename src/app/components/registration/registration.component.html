@@ -1,10 +1,5 @@
 <div class="registrationPage">
-  <div class="header"></div>
-  <div class="header2">
-    <div class="heading">
-      Welcome
-    </div>
-  </div>
+  <app-header></app-header>
   <div class="content">
     <form autocomplete="false">
       <div class="flex-box">
@@ -18,8 +13,8 @@
       <p *ngIf="validName == 'valid'" class="successmsg"><span>&#10004;</span> Valid user name</p>
       <div class="flex-box">
         <label class="flabel">Email</label>
-        <input class="ffield" type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
-          placeholder="Email" pattern="^\S*[@]\S*[.]\S*$" (change)="validemail(user.email, email.valid)" required />
+        <input class="ffield" type="email" name="email" #email="ngModel" [(ngModel)]="user.email" placeholder="Email"
+          pattern="^\S*[@]\S*[.]\S*$" (change)="validemail(user.email, email.valid)" required />
       </div>
       <div *ngIf="(email.invalid && (email.dirty || email.touched))">
         <p *ngIf="email.errors.required" class="errormsg">
@@ -81,6 +76,7 @@
         <button color="primary" [disabled]="!(validateForm())" (click)="onSubmit()">Register</button>
       </div>
     </form>
+    <a class="authnav" routerLink="/login" routerLinkActive="active">Already a User? Sign in here</a>
   </div>
   <!-- <div class="footer">
     <p>This is just test tab</p>
